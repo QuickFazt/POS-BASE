@@ -1,0 +1,97 @@
+<ion-content>
+  <app-header-regular  backButtonModal="true" title="Editar Usuario"></app-header-regular>
+
+  <form [formGroup]="form" (ngSubmit)="Submit()" style="padding:0px 40px 50px 40px;">
+
+
+    <ion-grid class="ion-no-padding" fixed>
+      <ion-row>
+        <ion-col class="ion-text-center ion-padding" size="12">
+          <ion-icon *ngIf="!imgLoaded && !img.value" style="font-size: 120px;" name="person-circle-outline" color="primary">
+          </ion-icon>
+
+          <ion-avatar *ngIf="img.value" style="margin: 0 auto; width: 120px;height: 120px;padding-bottom: 5px;">
+            <img [src]="img.value" />
+          </ion-avatar>
+
+          <div class="custom-input-file">
+            <input type="file" (change)="chooseImage($event)" class="input-file">
+            Seleccionar Foto
+          </div>
+
+        </ion-col>
+
+
+        <ion-col size="6">
+          <div class="did-floating-label-content">
+            <input class="did-floating-input" maxlength="11" formControlName="name" type="text" placeholder=" ">
+            <label class="did-floating-label">
+
+              Nombre</label>
+            <div style="padding-top: 10px;" *ngIf="(name.dirty || name.touched) && name.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="name.errors?.required">Ingresa el nombre</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="6">
+          <div class="did-floating-label-content">
+            <input class="did-floating-input" maxlength="11" formControlName="lastname" type="text" placeholder=" ">
+            <label class="did-floating-label">
+
+              Apellido</label>
+            <div style="padding-top: 10px;" *ngIf="(lastname.dirty || lastname.touched) && lastname.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="lastname.errors?.required">Ingresa el apellido</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="12">
+          <div class="did-floating-label-content">
+            <input class="did-floating-input" maxlength="10" formControlName="dni" type="tel" placeholder=" ">
+            <label class="did-floating-label">
+
+              DNI</label>
+            <div style="padding-top: 10px;" *ngIf="(dni.dirty || dni.touched) && dni.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="dni.errors?.required">Ingresa el DNI</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col *ngIf="user.id !== uid" size="12">
+          <ion-item style="margin-bottom: 20px;" lines="none" class="select-method">
+            <ion-label>Rol de Usuario</ion-label>
+            <ion-select formControlName="role" placeholder="Selecciona">
+              <ion-select-option value="admin">Admin</ion-select-option>
+              <ion-select-option value="cashier">Cajero</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div style="padding-top: 10px;" *ngIf="(role.dirty || role.touched) && role.errors">
+            <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+              class="alert alert-danger">
+              <span *ngIf="role.errors?.required">Selecciona el rol de usuario</span>
+            </div>
+          </div>
+        </ion-col>  
+      </ion-row>
+    </ion-grid>
+
+
+    <div class="ion-text-center" style="padding-top: 5px;">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Actualizar
+          <ion-icon name="person-add-outline"></ion-icon>
+        </span>
+
+      </button>
+    </div>
+
+
+  </form>
+</ion-content>

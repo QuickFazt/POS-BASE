@@ -1,0 +1,76 @@
+<ion-content>
+  <app-header-regular backButtonModal="true" title="Editar Moneda"></app-header-regular>
+
+  <form [formGroup]="form" (ngSubmit)="Submit()" style="padding:30px 40px 50px 40px;">
+
+
+    <ion-grid class="ion-no-padding" fixed>
+      <ion-row>
+
+        <ion-col size="12">
+          <div class="did-floating-label-content">
+            <input class="did-floating-input" maxlength="30" formControlName="name" type="text" placeholder=" ">
+            <label class="did-floating-label">Nombre</label>
+
+
+            <div style="padding-top: 10px;" *ngIf="(name.touched) && name.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="name.errors?.required">Ingresa el nombre de la moneda</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <label class="did-floating-label-textarea">Símbolo</label>
+          <div class="did-floating-label-content">
+            <ion-input (ionChange)="changeSymbol()" class="did-floating-textarea" maxlength="30" formControlName="symbol"
+              type="text" placeholder="Símbolo"></ion-input>
+           
+
+            <div style="padding-top: 10px;" *ngIf="(symbol.touched) && symbol.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="symbol.errors?.required">Ingresa el símbolo de la moneda</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+
+
+        <ion-col class="usd" size="4">
+           {{1 | currency: ' '}} USD =
+        </ion-col>
+        <ion-col size="8">
+          <div class="did-floating-label-content">
+            <input class="did-floating-input" currencyMask type="tel" formControlName="price" [options]="mask" />
+            <label class="did-floating-label">
+
+              Precio</label>
+            <div style="padding-top: 10px;" *ngIf="(price.touched) && price.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="price.errors?.required">Ingresa el precio de la moneda</span>
+                <span *ngIf="price.errors?.min">Ingresa un monto válido</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <div class="ion-text-center" style="padding-top: 5px;">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Actualizar</span>        
+       
+
+      </button>
+    </div>
+
+
+  </form>
+
+
+</ion-content>

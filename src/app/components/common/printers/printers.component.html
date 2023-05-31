@@ -1,0 +1,49 @@
+
+ 
+  
+  <ion-content>
+    <app-header-regular backButtonModal="true" title="Impresoras"></app-header-regular>
+    <ion-refresher *ngIf="showSpinner === false" (ionRefresh)="refreshBluetooth($event)" slot="fixed">
+      <ion-refresher-content refreshingText="Buscando">
+      </ion-refresher-content>
+    </ion-refresher>
+<div style="padding-top: 45px;">
+    <div class="ion-text-center" [hidden]="showSpinner === false">
+      <ion-spinner color="primary"></ion-spinner><br>
+      Buscando
+    </div>
+  
+    
+    <ion-list lines="full">
+      <ion-item button (click)="ConnectDevice(device.id)" *ngFor="let device of devices">
+        <ion-text>
+          <h3>Nombre: {{device.name}}</h3>
+          <p>Id: {{device.id}}</p>
+          <p>IP:
+            <span [hidden]="device.address == undefined">mac: </span>
+            <span [hidden]="device.uuid == undefined">uuid: </span>
+            {{device.address}} {{device.uuid}}
+          </p>
+          <p>
+            <span [hidden]="device.class == undefined">Clase: </span>
+            <span [hidden]="device.rssi == undefined">Rssi: </span>
+            {{device.class}} {{device.rssi}}
+          </p>
+        </ion-text>
+      </ion-item>
+    </ion-list>
+    
+    <p *ngFor="let item of messages">{{ item }}</p>
+    <div class="ion-text-center" [hidden]="devices.length > 0 || showSpinner == true || isConnected" text-center>
+     
+     <ion-text color="primary">
+      <ion-icon style="font-size: 120px;" name="print-outline"></ion-icon>
+      <p>No hay impresoras disponibles</p>
+     </ion-text>
+     
+
+    </div>
+  </div>
+  </ion-content>
+ 
+  

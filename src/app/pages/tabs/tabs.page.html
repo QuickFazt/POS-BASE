@@ -1,0 +1,31 @@
+<ion-tabs style="background: white;">
+     
+  <ion-tab-bar>
+ 
+     
+     <ion-tab-button tab="home">
+       <ion-icon name="home-outline"></ion-icon>
+     </ion-tab-button>
+ 
+     <ion-tab-button *ngIf="role == 'admin'" tab="admin">
+      <ion-icon name="shield-outline"></ion-icon>
+    </ion-tab-button>
+
+     <ion-tab-button *ngIf="router.url == '/tabs/generate-receipt'"  tab="generate-receipt">
+      <ion-icon name="receipt-outline"></ion-icon>
+      <ion-badge color="light" *ngIf="itemCounter.value" style="font-size: 12px;">{{itemCounter.value}}</ion-badge>     
+    </ion-tab-button>
+
+    <ion-tab-button *ngIf="router.url !== '/tabs/generate-receipt'"  tab="generate-receipt">
+      <ion-icon name="receipt-outline"></ion-icon>
+      <ion-badge color="warning" *ngIf="itemCounter.value" style="font-size: 12px;">{{itemCounter.value}}</ion-badge>     
+    </ion-tab-button>
+  
+
+     <ion-tab-button tab="profile">
+       <ion-icon name="person-circle"></ion-icon> 
+     </ion-tab-button>
+ 
+   </ion-tab-bar>
+
+ </ion-tabs>

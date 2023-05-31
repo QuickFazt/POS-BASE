@@ -1,0 +1,78 @@
+<ion-content>
+
+  
+<ion-toolbar style="height: 45px;" color="primary">
+</ion-toolbar>
+
+
+<div class="inverted-border-radius ">
+  <div class="title-app">
+    <strong>M O N E I T</strong> 
+    <div style="font-size: 12px;position: relative;bottom: 5px;">Administrador de Tiendas</div>
+  </div>
+  <div  class="header-content"> 
+    
+    <img class="animate__animated animate__bounceIn" src="../../../assets/icon/coin-logo.svg" alt="">
+   
+  </div>
+  
+  
+</div>
+
+
+<div *ngIf="!isConnected.value" class="ion-text-center empty-array">
+
+  <ion-text color="primary">
+      <ion-icon name="wifi-outline"></ion-icon>
+      <p>No tienes conexión</p>     
+  </ion-text>
+
+</div>
+
+
+  <form *ngIf="isConnected.value"  [formGroup]="form" (ngSubmit)="Submit()" style="padding:70px 40px;">
+
+    <div class="did-floating-label-content">
+      <input class="did-floating-input" formControlName="email" type="email" placeholder=" ">
+      <label class="did-floating-label">
+        <ion-icon name="person"></ion-icon>
+        Correo</label>
+
+      <div style="padding-top: 10px;" *ngIf="(email.touched) && email.errors">
+        <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;" class="alert alert-danger">
+          <span *ngIf="email.errors?.required">Ingresa tu email</span>
+          <span *ngIf="email.errors?.email">Ingresa un email válido</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="did-floating-label-content">
+      <input class="did-floating-input" formControlName="password" type="password" placeholder=" ">
+      <label class="did-floating-label">
+        <ion-icon name="lock-closed"></ion-icon>
+        Contraseña</label>
+
+
+      <div style="padding-top: 10px;" *ngIf="(password.touched) && password.errors">
+        <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;" class="alert alert-danger">
+          <span *ngIf="password.errors?.required">Ingresa tu contraseña</span>
+         </div>
+      </div>
+    </div>
+
+
+
+    <div class="ion-text-center" style="padding-top: 15px;">
+      <button type="submit" class="button-general">
+        <span style="padding-left: 40px;padding-right: 40px;">Ingresar
+          <ion-icon name="log-in-outline"></ion-icon>
+        </span>
+      </button>
+    </div>   
+
+  </form>
+
+
+</ion-content>

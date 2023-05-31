@@ -1,0 +1,66 @@
+<ion-content>
+  <app-header-regular title="Generar Recibo"></app-header-regular>
+
+
+
+  <div *ngIf="isConnected.value" class="container-components">
+    <!--=====Step 1: Added Products====-->
+    <app-added-products *ngIf="steps.add_products && !steps.add_products_checked" [receipt]="receipt">
+    </app-added-products>
+
+    <!--=====Step 2: Add User Data====-->
+    <app-user-data *ngIf="steps.user_data && !steps.user_data_checked"></app-user-data>
+
+    <!--=====Step 3: Payment Method====-->
+    <app-payment-method *ngIf="steps.payment && !steps.payment_checked"></app-payment-method>
+  </div>
+
+  <ion-fab *ngIf="steps.add_products && !steps.add_products_checked && !keyboard.isVisible && isConnected.value" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="Step2()">
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+
+  <ion-fab *ngIf="(steps.user_data || steps.payment) && !keyboard.isVisible && isConnected.value" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="danger" (click)="Step1()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <div *ngIf="!isConnected.value" class="ion-text-center empty-array">
+
+    <ion-text color="primary">
+        <ion-icon name="wifi-outline"></ion-icon>
+        <p>No tienes conexión</p>     
+    </ion-text>
+  
+  </div>  
+</ion-content>
+
+
+<ion-footer *ngIf="isConnected.value && !keyboard.isVisible">
+
+  <ion-grid style="font-size: 14px;background: white;" fixed>
+    <ion-row *ngIf="receipt.taxPercent > 0" style="position: relative;top: 7px;">
+      <ion-col size="6">Impuesto ({{receipt.taxPercent}}%)</ion-col>
+      <ion-col class="ion-text-end" size="6">{{ getReceiptTax() | currency: ' '}} USD </ion-col>
+    </ion-row>
+    <ion-row *ngIf="receipt.taxPercent > 0" style="position: relative;bottom: 7px;">
+      <ion-col size="6">Subtotal</ion-col>
+      <ion-col class="ion-text-end" size="6">{{ getSubtotal() | currency: ' '}} USD</ion-col>
+    </ion-row>
+
+     
+  </ion-grid>
+  <ion-item lines="none" style="position: relative;bottom: 10px;" class="total ion-no-padding">
+    <ion-label style="padding-left: 10px;">Total</ion-label>
+    <span  style="font-size: 14px;text-align: end;" slot="end">
+      <div >{{ getTotal()| currency: ' '}} USD</div>
+     <div *ngIf="currency.length > 0">
+       <div *ngFor="let c of currency">{{ getTotal() * c.price | currency: ' '}} {{c.symbol}}</div>
+     </div> 
+    </span>
+  </ion-item>
+</ion-footer>

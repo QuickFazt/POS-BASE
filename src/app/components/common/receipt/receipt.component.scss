@@ -1,0 +1,29 @@
+ion-card{
+    border-radius: 20px;
+    min-height: 330px;
+    padding-top: 15px;
+}
+
+.printer-icon{
+    font-size: 110px;
+}
+
+ion-item{
+    font-size: 13px;
+}
+
+ion-item span{
+    text-align: end;
+    color:gray;
+   
+}
+
+ion-item ion-label{
+   color: var(--ion-color-primary);
+   
+}
+
+h4{
+    color: var(--ion-color-primary);
+    font-weight: bold;
+}

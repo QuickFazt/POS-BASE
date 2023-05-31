@@ -1,0 +1,36 @@
+<ion-content>
+  <app-header-regular title="Agregar Productos"></app-header-regular>
+
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div *ngIf="isConnected.value">
+    <ion-segment [(ngModel)]="option">
+      <ion-segment-button value="list">
+        <ion-label style="text-transform: capitalize;">Lista</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="qr">
+        <ion-label style="text-transform: capitalize;">Código</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="option == 'list'">
+      <app-add-product-from-list [products]="products" [waiting]="waiting"></app-add-product-from-list>
+    </div>
+
+
+    <div *ngIf="option == 'qr'">
+      <app-add-product-from-code [products]="products" [waiting]="waiting"></app-add-product-from-code>
+    </div>
+  </div>
+
+  <div *ngIf="!isConnected.value" class="ion-text-center empty-array">
+    <ion-text color="primary">
+      <ion-icon name="wifi-outline"></ion-icon>
+      <p>No tienes conexión</p>
+    </ion-text>
+  </div>
+
+</ion-content>

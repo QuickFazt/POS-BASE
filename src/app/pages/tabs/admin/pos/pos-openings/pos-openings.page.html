@@ -1,0 +1,48 @@
+<ion-content>
+  <app-header-regular backButton="backButton" title="POS #{{posNumber}}"></app-header-regular>
+
+  <div style="padding-bottom: 80px; padding-top: 20px;">
+<div *ngIf="waiting">
+      <ion-item *ngFor="let s of [1,1,1,1,1,1,1,1,1]">
+        <ion-label>
+          <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </div>
+    <ion-item *ngFor="let o of openings">
+      <ion-label>
+        <ion-text color="primary">
+          <div class="title">Apertura #{{o.counter}}</div>
+        </ion-text>
+        <div>Fecha de Apertura: {{o.openingDate}}, {{o.openingHour}}</div>
+        <div>Fecha de Cierre:
+          <span [class.in-progress]="o.closingDate == 'En curso'">{{o.closingDate}}</span>
+          <span *ngIf="o.closingDate !== 'En curso'">, {{o.closingHour}}</span>
+        </div>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="medium" (click)="Options(o)">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+  </div>
+
+<div *ngIf="!waiting && openings.length == 0" class="ion-text-center">
+
+    <ion-text color="primary">
+      <ion-icon style="font-size: 120px;" name="cash-outline"></ion-icon>
+      <p>No hay aperturas de venta en este POS</p>
+    </ion-text>
+
+  </div>
+
+  <ion-fab *ngIf="!waiting" vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="inProgress ? closePosConfirm() : openPos()" class="ion-no-padding"
+      [color]="inProgress ?  'danger' : 'success'">
+      <ion-icon style="font-size: 45px;" src="../../../../../../../assets/icon/pos.svg"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

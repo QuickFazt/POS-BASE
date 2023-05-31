@@ -1,0 +1,28 @@
+<ion-content>
+  <app-header-regular title="Administrador"></app-header-regular>
+
+  <ion-grid *ngIf="isConnected.value" fixed>
+    <ion-row>
+      <ion-col *ngFor="let p of pages" size="6">
+        <ion-card *ngIf="!p.icon_external" (click)="GoTo(p)" class="ion-text-center" color="primary">
+          <ion-icon [name]="p.icon"></ion-icon>
+          <div>{{p.name}}</div>
+        </ion-card>
+
+        <ion-card *ngIf="p.icon_external" (click)="GoTo(p)" class="ion-text-center" color="primary">
+          <ion-icon style="font-size: 70px;" src="../../../../../../../assets/icon/{{p.icon_external}}"></ion-icon>
+          <div>{{p.name}}</div>
+        </ion-card>
+      </ion-col>      
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="!isConnected.value" class="ion-text-center empty-array">
+
+    <ion-text color="primary">
+        <ion-icon name="wifi-outline"></ion-icon>
+        <p>No tienes conexión</p>     
+    </ion-text>
+  
+  </div>   
+</ion-content>

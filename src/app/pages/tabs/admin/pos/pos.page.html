@@ -1,0 +1,45 @@
+<ion-content>
+  <app-header-regular backButton="true" title="POS Disponibles"></app-header-regular>
+
+
+  <div style="padding-top: 20px;">
+    <div *ngIf="waiting">
+      <ion-item *ngFor="let s of [1,1,1,1,1,1,1,1,1]">
+        <ion-label>
+          <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </div>
+
+
+    <div *ngIf="!waiting && poss.length > 0">
+      <ion-item routerLink="/tabs/admin/pos/pos-openings/{{s.id}}/{{s.number}}" detail *ngFor="let s of poss">
+        <ion-icon [color]="s.opened ? 'success' : 'medium'" style="font-size: 45px;" slot="start" src="../../../../../../../assets/icon/pos.svg"></ion-icon>
+        <ion-label [color]="s.opened ? 'success' : 'medium'">
+          <strong>POS #{{s.number}}</strong> 
+          <ion-text style="font-size: 13px;" >
+            <div *ngIf="s.opened">Abierto a Ventas</div>  
+            <div *ngIf="!s.opened">Inactivo</div> 
+          </ion-text>
+         
+        </ion-label>        
+      </ion-item>
+    </div>
+  </div>
+  <div *ngIf="!waiting && poss.length == 0" class="ion-text-center empty-array">
+
+    <ion-text color="primary">
+      <ion-icon style="font-size: 120px;" name="cash-outline"></ion-icon>
+      <p>No hay POS registrados</p>
+    </ion-text>
+
+  </div>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="newPosConfirm()" color="secondary">
+      <ion-icon color="primary" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

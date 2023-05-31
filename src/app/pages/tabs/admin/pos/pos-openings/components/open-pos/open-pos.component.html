@@ -1,0 +1,64 @@
+<ion-content>
+  <app-header-regular backButtonModal="x" title="Apertura de Caja"></app-header-regular>
+  <form [formGroup]="form" (ngSubmit)="Submit()" class="ion-padding">
+
+
+    <ion-grid class="ion-no-padding" fixed>
+      <ion-row>
+        <ion-col size="12">
+          <ul>
+            <li>La apertura y cierre de caja te permiten llevar el control del efectivo en un periodo de tiempo
+              determinado</li>
+            <li>La base inicial es el dinero disponible para realizar la apertura de caja</li>
+          </ul>
+        </ion-col>
+
+        <ion-col style="padding-bottom:20px;" size="12">
+          <ion-item lines="none">
+            <ion-label>Cajero Asignado</ion-label>
+            <ion-select  class="color-assigned" formControlName="cashierId" interface="popover" placeholder="Selecciona">
+              <ion-select-option  *ngFor="let u of users" [value]="u.id">
+               <span *ngIf="u.id !== currentUser">{{u.name}} {{u.lastname}}</span> 
+               <span *ngIf="u.id == currentUser">Asignar a mí</span> 
+              </ion-select-option>             
+            </ion-select>
+          </ion-item>
+
+          <div style="padding-top: 10px;" *ngIf="(cashierId.dirty) && cashierId.errors">
+            <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+              class="alert alert-danger">
+              <span *ngIf="cashierId.errors?.required">Asigna un cajero a esta apertura</span>              
+            </div>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <div class="did-floating-label-content">
+            <input currencyMask class="did-floating-input" formControlName="initialBase" type="tel" placeholder=" ">
+            <label class="did-floating-label">
+
+              Base Inicial</label>
+            <div style="padding-top: 10px;" *ngIf="(initialBase.touched) && initialBase.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="initialBase.errors?.required">Ingresa el precio del producto</span>
+                <span *ngIf="initialBase.errors?.min">Ingresa un monto válido</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+
+
+      </ion-row>
+    </ion-grid>
+
+
+    <div class="ion-text-center">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Abrir Caja</span>
+      </button>
+    </div>
+
+
+  </form>
+</ion-content>

@@ -1,0 +1,32 @@
+ion-avatar{
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+}
+
+ion-label{
+    text-transform: capitalize;
+}
+
+p{
+    padding-top: 10px;
+    font-size: 13px;
+    color: gray;
+    text-align: justify;
+}
+
+.stock{
+    font-size: 14px;
+    color: gray;
+}
+
+.price{
+    font-size: 16px;
+    color: var(--ion-color-success);
+}
+
+.name{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+}

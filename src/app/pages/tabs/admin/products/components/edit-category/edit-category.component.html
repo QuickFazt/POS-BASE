@@ -1,0 +1,58 @@
+<ion-content>
+  <app-header-regular backButtonModal="true" title="Editar Categoría"></app-header-regular>
+ 
+  <form [formGroup]="form" (ngSubmit)="Submit()" style="padding:0px 40px 50px 40px;">
+
+
+    <ion-grid class="ion-no-padding" fixed>
+      <ion-row>
+        <ion-col class="ion-text-center ion-padding" size="12">
+          <ion-icon *ngIf="!imgLoaded && !image.value" style="font-size: 120px;" name="image-outline" color="medium">
+          </ion-icon>
+
+          <ion-avatar *ngIf="image.value" style="margin: 0 auto; width: 120px;height: 120px;padding-bottom: 5px;">
+            <img [src]="image.value" />
+          </ion-avatar>
+
+          <div class="custom-input-file">
+            <input type="file" (change)="chooseImage($event)" class="input-file">
+            Seleccionar Imagen
+          </div>
+
+        </ion-col>
+
+
+        <ion-col size="12">
+          <div class="did-floating-label-content">
+            <input class="did-floating-input" maxlength="30" formControlName="name" type="text" placeholder=" ">
+            <label class="did-floating-label">Nombre</label>
+
+              
+            <div style="padding-top: 10px;" *ngIf="(name.touched) && name.errors">
+              <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;"
+                class="alert alert-danger">
+                <span *ngIf="name.errors?.required">Ingresa el nombre de la categoría</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+
+        
+      </ion-row>
+    </ion-grid>
+
+
+    <div class="ion-text-center" style="padding-top: 5px;">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Actualizar
+          <ion-icon name="add"></ion-icon>
+        </span>
+
+      </button>
+    </div>
+
+
+  </form>
+
+ 
+</ion-content>

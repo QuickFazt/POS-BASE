@@ -1,0 +1,135 @@
+<div style="padding: 10px;">
+  <ion-card class="ion-text-center shadow">
+    <h3 style="padding-top: 15px;">Cliente</h3>
+
+<ion-segment [(ngModel)]="type">
+  <ion-segment-button value="old">
+    <ion-label>Frecuente</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="new">
+    <ion-label>Nuevo</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+
+
+<ion-list *ngIf="type == 'old'">
+  <form  [formGroup]="searchForm" (ngSubmit)="searchClient()">
+
+  <ion-searchbar formControlName="dniSearch" class="ion-text-start" type="tel" placeholder="Buscar" animated mode="ios">
+  </ion-searchbar>
+
+  <div *ngIf="!waiting && clientExist && clients.length == 0" class="ion-text-center">
+
+    <ion-text color="primary">
+      <ion-icon style="font-size: 90px;" name="person-outline"></ion-icon>
+      <p>Busca al cliente por DNI</p>
+    </ion-text>
+    <div class="ion-text-center" style="padding-bottom: 10px;">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Buscar        
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!waiting && !clientExist && clients.length == 0" class="ion-text-center">
+
+    <ion-text color="danger">
+      <ion-icon style="font-size: 90px;" name="person-outline"></ion-icon>
+      <p>No existe este cliente</p>
+    </ion-text>
+    <div class="ion-text-center" style="padding-bottom: 10px;">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Buscar Otro      
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="ion-text-center" *ngIf="waiting">
+    <ion-spinner color="primary"></ion-spinner><br>
+    Buscando
+  </div>
+  
+  <div *ngIf="clients.length > 0">    
+    <ion-item detail (click)="getClient(c.id)" *ngFor="let c of clients">
+      <ion-label color="primary">
+        <strong style="font-size: 15px;">{{c.name}} {{c.lastname}}</strong>
+        <ion-text color="medium">
+          <div style="font-size: 13px;">DNI: {{c.dni}} </div>
+        </ion-text>
+      </ion-label>      
+    </ion-item>  
+    <div class="ion-text-center" style="padding-bottom: 10px;padding-top: 10px;">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Buscar Otro        
+        </span>
+      </button>
+    </div>  
+  </div>
+</form>
+</ion-list>
+  
+
+    <form *ngIf="type == 'new'" [formGroup]="form" (ngSubmit)="Submit()" style="padding:20px;padding-top: 10px;">
+
+     <ion-grid class="ion-no-padding" fixed>
+        <ion-row>
+          <ion-col size="6">
+            <div class="did-floating-label-content">
+              <input class="did-floating-input" maxlength="11" formControlName="name" type="text" placeholder=" ">
+              <label class="did-floating-label">
+                <ion-icon name="person"></ion-icon>
+                Nombre</label>
+        
+              <div style="padding-top: 10px;" *ngIf="(name.dirty || name.touched) && name.errors">
+                <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;" class="alert alert-danger">
+                  <span *ngIf="name.errors?.required">El nombre es requerido</span> 
+                  <span *ngIf="name.errors?.pattern">Este campo solo acepta letras</span>            
+                </div>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="did-floating-label-content">
+              <input class="did-floating-input" maxlength="11" formControlName="lastname" type="text" placeholder=" ">
+              <label class="did-floating-label">
+                <ion-icon name="person"></ion-icon>
+                Apellido</label>
+        
+              <div style="padding-top: 10px;" *ngIf="(lastname.dirty || lastname.touched) && lastname.errors">
+                <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;" class="alert alert-danger">
+                  <span *ngIf="lastname.errors?.required">El apellido es requerido</span> 
+                  <span *ngIf="lastname.errors?.pattern">Este campo solo acepta letras</span>            
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <div class="did-floating-label-content">
+        <input class="did-floating-input" maxlength="10" formControlName="dni" type="tel" placeholder=" ">
+        <label class="did-floating-label">          
+          DNI</label>
+  
+        <div style="padding-top: 10px;" *ngIf="(dni.dirty || dni.touched) && dni.errors">
+          <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;" class="alert alert-danger">
+            <span *ngIf="dni.errors?.required">El DNI del cliente es requerido</span>            
+          </div>
+        </div>
+      </div>
+  
+              
+    <div class="ion-text-center" style="padding-top: 25px;padding-bottom: 10px;">
+      <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+        <span style="padding-left: 40px;padding-right: 40px;">Siguiente
+          <ion-icon name="arrow-forward"></ion-icon>
+        </span>
+      </button>
+    </div>
+    </form>
+    
+  </ion-card>
+  </div>

@@ -1,0 +1,95 @@
+<ion-content>
+
+
+
+<div class="container-p">
+
+  
+
+    <div *ngIf="!waitingUserData">
+      <ion-avatar>
+        <img [src]="user.img" />
+      </ion-avatar>
+
+      <div style="padding-top: 10px;" class="ion-text-center">
+        <ion-chip *ngIf="user.role == 'admin'" color="primary" mode="ios" outline="true">
+          <ion-icon name="shield-outline"></ion-icon>
+          <ion-label>Admin</ion-label>           
+        </ion-chip>
+
+        <ion-chip *ngIf="user.role == 'cashier'" color="primary" mode="ios" outline="true">
+          <ion-icon name="receipt-outline"></ion-icon>       
+          <ion-label>Cajero</ion-label>
+        </ion-chip>
+      </div>
+
+
+      <ion-item>
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-label class="user-label ion-text-wrap">Nombre
+          <div class="user-value">{{user.name}} {{user.lastname}}</div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="id-card-outline"></ion-icon>
+        <ion-label class="user-label ion-text-wrap">DNI
+          <div class="user-value">{{user.dni}}</div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="at-outline"></ion-icon>
+        <ion-label class="user-label ion-text-wrap">Correo
+          <div class="email">{{user.email}}</div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="cash-outline"></ion-icon>
+        <ion-label class="user-label ion-text-wrap">Aperturas de Caja
+          <span *ngIf="inProgress" class="inProgress">(una en curso)</span>
+          <div class="user-value">{{userOpenings.length}}</div>
+        </ion-label>
+      </ion-item>
+    </div>
+
+    <div *ngIf="waitingUserData" class="ion-text-center">
+      <ion-avatar>
+        <ion-skeleton-text animated style="width: 100%; height:100%;"></ion-skeleton-text>
+      </ion-avatar>
+
+      <ion-item>
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-label class="user-label">Nombre
+          <div class="user-value">
+            <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="id-card-outline"></ion-icon>
+        <ion-label class="user-label">DNI
+          <div class="user-value">
+            <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="at-outline"></ion-icon>
+        <ion-label class="user-label">Correo
+          <div class="user-value">
+            <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="cash-outline"></ion-icon>
+        <ion-label class="user-label">Aperturas de Caja
+          <div class="email">
+            <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          </div>
+        </ion-label>
+      </ion-item>
+
+    </div>
+
+</div>
+</ion-content>

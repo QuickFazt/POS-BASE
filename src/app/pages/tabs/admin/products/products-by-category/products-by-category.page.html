@@ -1,0 +1,61 @@
+<ion-content>
+  <app-header-regular backButton="backButton" title="{{categoryName}}"></app-header-regular>
+
+<div style="padding-bottom: 60px;">
+
+ 
+
+  <div style="padding-top: 30px;" *ngIf="waiting">
+    <ion-item *ngFor="let s of [1,1,1,1,1,1,1,1,1]">
+      <ion-label>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </div>
+
+
+  <div style="padding-top: 30px;" *ngIf="!waiting && products.length > 0">
+    <div style="padding-left: 10px;padding-right: 10px;">
+    <ion-searchbar (ionChange)="searchProduct($event)" placeholder="Buscar" animated mode="ios">
+    </ion-searchbar>
+    </div>
+    <ion-item  *ngFor="let p of products | productFilter: result">
+      <ion-avatar (click)="productDetail(p)" *ngIf="p.image" slot="start">
+        <img [src]="p.image" />
+      </ion-avatar>
+
+      <ion-icon *ngIf="!p.image" color="primary" style="font-size: 30px;" slot="start" name="person-circle-outline">
+      </ion-icon>
+      <ion-label (click)="productDetail(p)" class="ion-text-wrap" color="primary">
+        <strong style="font-size: 15px;">{{p.name}}</strong>
+        <ion-text color="medium">
+          <div style="font-size: 13px;">Precio: {{p.price | currency: ' '}} USD </div>
+          <div [class.no-stock]="p.stock == 0" style="font-size: 13px;">Disponibles: {{p.stock}} </div>
+        </ion-text>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="medium" (click)="Options($event, p)">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </div>
+
+
+  <div *ngIf="!waiting && products.length == 0" class="ion-text-center empty-array">
+
+    <ion-text color="primary">
+      <ion-icon style="font-size: 120px;" name="cart-outline"></ion-icon>
+      <p>No hay productos</p>
+    </ion-text>
+
+  </div>
+</div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="newProduct()" color="secondary">
+      <ion-icon color="primary" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

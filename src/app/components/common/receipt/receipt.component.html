@@ -1,0 +1,67 @@
+<ion-content>
+  <app-header-regular backButtonModal="true" title="Recibo"></app-header-regular>
+  <div style="padding: 10px;">
+    <ion-card class="ion-text-center shadow">
+
+
+      <ion-item>
+        <ion-label>Nombre de cliente:</ion-label>
+        <span *ngIf="!waiting">{{client.name}} {{client.lastname}}</span>
+        <ion-skeleton-text *ngIf="waiting" animated style="width: 90%"></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>DNI de cliente:</ion-label>
+        <span *ngIf="!waiting">{{client.dni}}</span>
+        <ion-skeleton-text *ngIf="waiting" animated style="width: 90%"></ion-skeleton-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha:</ion-label>
+        <span>{{receipt.date}}, {{receipt.hour}}</span>
+      </ion-item>   
+      <ion-item>
+        <ion-label>Monto Recibido:</ion-label>
+        <span>{{receipt.amountReceived | currency: ' '}} USD</span>
+      </ion-item>
+      <ion-item *ngIf="receipt.change">
+        <ion-label>Vuelto:</ion-label>
+        <span>{{receipt.change | currency: ' '}} USD</span>
+      </ion-item>
+      <ion-item *ngIf="receipt.taxPercent">
+        <ion-label>Impuesto ({{receipt.taxPercent}}%):</ion-label>
+        <span>{{receipt.tax | currency: ' '}} USD</span>
+      </ion-item>
+      <ion-item>
+        <ion-label>Subtotal:</ion-label>
+        <span>{{receipt.subtotal | currency: ' '}} USD</span>
+      </ion-item>     
+      <ion-item>
+        <ion-label>Total</ion-label>
+        <span  style="font-size: 14px;text-align: end;" slot="end">
+          <div >{{ receipt.total | currency: ' '}} USD</div>
+         <div *ngIf="receipt.currency.length > 0">
+           <div *ngFor="let c of receipt.currency">{{ receipt.total * c.price | currency: ' '}} {{c.symbol}}</div>
+         </div> 
+        </span>
+      </ion-item>
+
+
+
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button (click)="Print()" expand="block" shape="round">
+              Imprimir
+              <ion-icon slot="end" name="print-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button (click)="Checked()" color="success" expand="block" shape="round">
+              Listo
+              <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </div>
+</ion-content>

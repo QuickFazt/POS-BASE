@@ -1,0 +1,65 @@
+<ion-content>
+  <app-header-regular backButtonModal="x" title="Detalle"></app-header-regular>
+  <div style="padding-top: 20px;">
+
+    <ion-item>
+      <ion-label>Fecha de Apertura</ion-label>
+      <span slot="end">
+        {{opening.openingDate}}, {{opening.openingHour}}
+      </span>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha de Cierre</ion-label>
+      <span *ngIf="opening.closingDate !== 'En curso'" slot="end">
+        {{opening.closingDate}}, {{opening.closingHour}}
+      </span>
+      <span class="in-progress" *ngIf="opening.closingDate == 'En curso'" slot="end">
+        {{opening.closingDate}}
+      </span>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Número de Ventas</ion-label>
+      <span slot="end">{{opening.salesCounter}}</span>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ganancia</ion-label>
+      <span slot="end">{{ opening.profit | currency: ' '}} USD</span>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Base Inicial</ion-label>
+      <span slot="end">
+        {{opening.initialBase | currency: ' '}} USD
+      </span>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Total</ion-label>
+      <span slot="end">
+        {{opening.total | currency: ' '}} USD
+      </span>
+    </ion-item>
+
+  </div>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="Print()" expand="block" shape="round">
+          Imprimir
+          <ion-icon slot="end" name="print-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="Checked()" color="success" expand="block" shape="round">
+          Listo
+          <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-content>
+  <app-header-regular backButton="backButton" title="Monedas"></app-header-regular>
+
+  <div style="padding-top: 20px;">
+
+    <div *ngIf="waiting">
+      <ion-item *ngFor="let c of [1,1,1,1,1,1,1,1,1,1,1,1,1]">
+        <ion-icon slot="start" style="font-size: 35px;" color="medium" src="../../../../../assets/icon/currency.svg">
+        </ion-icon>
+        <ion-label>
+          <div>
+            <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          </div>
+          <div>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </div>
+        </ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="!waiting && currency.length !== 0">
+      <ion-item *ngFor="let c of currency">
+        <ion-icon slot="start" style="font-size: 35px;" color="primary" src="../../../../../assets/icon/currency.svg">
+        </ion-icon>
+        <ion-label>
+          <div><strong class="primary">Nombre:</strong> {{c.name}}</div>
+          <div><strong class="primary">Símbolo:</strong> {{c.symbol}}</div>
+          <div><strong class="primary">{{1 | currency:' '}} USD = {{c.price | currency:' '}} {{c.symbol}}</strong></div>
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button color="medium" (click)="Options(c)">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </div>
+
+
+  </div>
+
+
+  <div *ngIf="!waiting && currency.length == 0" class="ion-text-center empty-array">
+    <ion-text color="primary">
+      <ion-icon style="font-size: 120px;" color="primary" src="../../../../../assets/icon/currency.svg"></ion-icon>
+      <p>No hay monedas</p>
+    </ion-text>
+  </div>
+  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="newCurrency()" color="secondary">
+      <ion-icon color="primary" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,35 @@
+<div class="empty-array ion-text-center" *ngIf="receipt.products.length == 0">
+  <ion-icon name="add"></ion-icon>
+  <div>Agrega productos para generar una venta</div>
+</div>
+
+
+<div *ngIf="receipt.products.length > 0">
+  <ion-item *ngFor="let p of receipt.products">
+    <ion-avatar slot="start">
+      <img [src]="p.image" />
+    </ion-avatar>
+    <ion-label class="ion-text-wrap">
+      {{p.name}}
+      <div>
+        {{p.price | currency: ' '}} USD
+        <ion-button style="position: relative;bottom: 5px;left: 5px;" class="ion-no-padding" fill="clear"
+          (click)="removeProduct(p)">
+          <ion-icon color="medium" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="decreaseProduct(p)">
+        <ion-icon color="primary" name="remove-circle"></ion-icon>
+      </ion-button>
+      <ion-button>
+        {{p.quantity}}
+      </ion-button>
+      <ion-button (click)="increaseProduct(p)">
+        <ion-icon color="primary" name="add-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-item>
+</div>

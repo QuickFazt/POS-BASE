@@ -1,0 +1,74 @@
+ion-card{
+    border-radius: 20px;
+    height: 180px; 
+    width: 100%;   
+}
+
+.btn-position{ 
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 86%;
+  top: 20px;
+}
+
+.btn-option{
+  width: 30px;
+  height: 30px;
+  --border-radius: 100%;
+}
+
+.square{
+    width: 100%;
+    height: 110px;
+    background: transparent;
+    overflow: hidden;
+    
+    
+  }
+  
+  .square img{
+    width: 100%;
+    height: auto;
+    
+  }
+  @supports(object-fit: cover){
+      .square img{
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+      }
+    }
+
+    @media screen and (min-width:359px) and (max-width:389px) {
+      ion-card{
+        border-radius: 20px;
+        height: 180px; 
+        width: 140px;   
+      }
+    } 
+  
+
+    @media screen and (min-width:390px) and (max-width:445px) {
+      ion-card{
+        border-radius: 20px;
+        height: 180px; 
+        width: 150px;   
+      }
+    } 
+
+ @media screen and (min-width:430px) and (max-width:470px) {
+  ion-card{
+    border-radius: 20px;
+    height: 180px; 
+    width: 180px;   
+  }
+  
+}  
+
+@media screen and (min-width:471px) and (max-width:519px) {
+  ion-card{
+    border-radius: 20px;
+    height: 180px; 
+    width: 190px;   
+  }
+}

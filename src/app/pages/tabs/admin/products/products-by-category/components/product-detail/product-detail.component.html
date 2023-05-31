@@ -1,0 +1,32 @@
+<ion-content>
+
+  <app-header-regular backButtonModal="backButtonModal" title="Detalle"></app-header-regular>
+
+  <div class="ion-text-center ion-padding">
+
+    <ion-avatar>
+      <img [src]="product.image" />
+    </ion-avatar>
+
+    <ion-text color="primary">
+      <div class="name">{{product.name}}</div>
+      <div class="stock">Disponibles: {{product.stock}}</div>
+      <ion-chip color="success" mode="ios" outline="true">
+        <ion-icon  name="cash-outline"></ion-icon>
+        <ion-label>{{product.price | currency: ' '}} USD</ion-label>
+      </ion-chip>    
+    </ion-text>
+   
+    <ion-segment [(ngModel)]="toScan">
+      <ion-segment-button value="qr">
+        <ion-label>Código QR</ion-label>
+      </ion-segment-button>     
+    </ion-segment>
+
+    <div *ngIf="toScan == 'qr'">
+      <ngx-qrcode [elementType]="elementType" [value]="product.id" cssClass="aclass" errorCorrectionLevel="L">
+      </ngx-qrcode>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,72 @@
+<ion-content>
+  <app-header-regular backButton="true" title="Ventas"></app-header-regular>
+
+  <div class="ion-padding"> 
+    
+  </div>
+<ion-grid fixed>
+
+  <ion-row>
+    <ion-col class="filter-label" size="5"> 
+      Fecha
+    </ion-col>
+    <ion-col class="filter-label" size="7">         
+      Cajero Encargado
+    </ion-col>
+  </ion-row>
+
+  <ion-row style="position: relative;bottom: 10px;">
+    <ion-col size="5"> 
+      <ion-input type="date" (ionChange)="getSales()" [(ngModel)]="currentDate"></ion-input>
+    </ion-col>
+    <ion-col size="7">         
+        <ion-select [(ngModel)]="cashier" (ionChange)="getSalesType($event)" interface="popover"  placeholder="Selecciona">
+          <ion-select-option  value="all">Todos</ion-select-option>
+          <ion-select-option *ngFor="let u of users" [value]="u.id">{{u.name}}</ion-select-option> 
+        </ion-select>  
+    </ion-col>    
+  </ion-row>
+
+</ion-grid>
+
+
+    <div *ngIf="waiting">
+      <ion-item *ngFor="let s of [1,1,1,1,1,1,1,1,1]">
+        <ion-label>
+          <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </ion-label>
+      </ion-item>
+    </div>
+
+
+    <div *ngIf="!waiting && sales.length > 0">
+      <ion-item  *ngFor="let s of sales">
+        <ion-avatar (click)="Receipt(s)" slot="start">
+          <img [src]="s.img" />
+        </ion-avatar>
+        <ion-label (click)="Receipt(s)" color="primary">
+          <strong style="font-size: 15px;">Fecha: {{s.date | date: 'dd/MM/yyyy'}}</strong>
+          <ion-text color="medium">
+            <div style="font-size: 14px;">Total: {{s.total | currency: ' '}} USD </div>
+          </ion-text>
+        </ion-label>
+
+        <ion-buttons slot="end">
+          <ion-button color="medium" (click)="Options(s)">
+            <ion-icon name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </div>
+  
+  <div *ngIf="!waiting && sales.length == 0" class="ion-text-center empty-array">
+
+    <ion-text color="primary">
+      <ion-icon style="font-size: 120px;" name="cash-outline"></ion-icon>
+      <p>No hay ventas</p>
+    </ion-text>
+
+  </div>
+
+</ion-content>

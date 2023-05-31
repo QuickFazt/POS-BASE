@@ -1,0 +1,7 @@
+{
+  "name": "billing-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

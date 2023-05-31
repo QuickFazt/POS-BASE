@@ -1,0 +1,57 @@
+<ion-content>
+  <app-header-regular backButton="backButton" title="Productos"></app-header-regular>
+
+
+  <ion-grid *ngIf="waiting" fixed>
+    <ion-row>
+      <ion-col *ngFor="let s of [1,1,1,1,1,1,1,1,1]" size="6">
+        <ion-card>
+          <div class="square">
+            <ion-skeleton-text animated style="width: 100%;height: 100%;"></ion-skeleton-text>
+          </div>
+          <div class="ion-padding ion-text-center">
+            <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid  *ngIf="!waiting && categories.length > 0" fixed>
+    <ion-row>
+      <ion-col  *ngFor="let c of categories">
+        <ion-card class="shadow">
+          <div class="btn-position">
+            <ion-button color="light" class="btn-option ion-no-padding" (click)="Options(c)" >
+              <ion-icon name="ellipsis-vertical"></ion-icon>
+            </ion-button>
+          </div>
+          <div routerLink="/tabs/admin/products/products-by-category/{{c.id}}/{{c.name}}" class="square">
+            <img [src]="c.image">
+          </div>
+          <ion-text color="primary">
+            <div style="font-weight: bold;font-size: 13px;" class="ion-padding ion-text-center">{{c.name}}</div>
+          </ion-text>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="!waiting && categories.length == 0" class="ion-text-center empty-array">
+
+    <ion-text color="primary">
+      <ion-icon style="font-size: 120px;" name="cart-outline"></ion-icon>
+      <p>No hay productos</p>
+    </ion-text>
+
+  </div>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="newCategory()" color="secondary">
+      <ion-icon color="primary" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

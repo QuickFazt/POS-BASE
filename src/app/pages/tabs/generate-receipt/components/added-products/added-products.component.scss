@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ion-item{
+    font-size: 12px;
+    --background: transparent;
+   }
+
+ion-item span{
+    color: var(--ion-color-primary);
+}
+
+ion-item ion-label{
+  
+    color: var(--ion-color-dark);
+    padding: 10px 0px 10px 15px;
+}
+
+ion-item ion-label div{
+    color: var(--ion-color-primary);
+    padding-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}

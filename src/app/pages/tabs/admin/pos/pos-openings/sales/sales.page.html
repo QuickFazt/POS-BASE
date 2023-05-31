@@ -1,0 +1,38 @@
+<ion-content>
+  <app-header-regular backButton="true" title="Ventas"></app-header-regular>
+
+<div style="padding-top: 20px;">
+  <div *ngIf="waiting">
+    <ion-item *ngFor="let s of [1,1,1,1,1,1,1,1,1]">
+      <ion-label>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      </ion-label>
+    </ion-item>
+  </div>
+
+
+  <div *ngIf="!waiting && sales.length > 0">
+    <ion-item detail (click)="Receipt(s)" *ngFor="let s of sales">
+      <ion-avatar slot="start">
+        <img [src]="s.img" />
+      </ion-avatar>
+      <ion-label color="primary">
+        <strong style="font-size: 15px;">Fecha: {{s.date | date: 'dd/MM/yyyy'}}</strong>
+        <ion-text color="medium">
+          <div style="font-size: 14px;">Total: {{s.total | currency: ' '}} USD </div>
+        </ion-text>
+      </ion-label>      
+    </ion-item>
+  </div>
+</div>
+<div *ngIf="!waiting && sales.length == 0" class="ion-text-center empty-array">
+
+  <ion-text color="primary">
+    <ion-icon style="font-size: 120px;" name="cash-outline"></ion-icon>
+    <p>No hay ventas</p>
+  </ion-text>
+
+</div>
+
+</ion-content>

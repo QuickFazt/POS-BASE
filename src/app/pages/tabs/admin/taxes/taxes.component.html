@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="setTax()" style="padding:0px 40px 50px 40px;">
+
+<h4>Ingresa el porcentaje de impuesto que tendrán las ventas</h4>
+
+  <div class="did-floating-label-content">
+    <input class="did-floating-input" min="0" max="100" formControlName="taxPercent" type="number" placeholder=" ">
+    <label class="did-floating-label">Porcentaje de Impuesto %</label>
+
+
+    <div style="padding-top: 10px;" *ngIf="(taxPercent.touched) && taxPercent.errors">
+      <div style="border-radius: 20px; font-size: 13px;padding: 0; padding-left: 10px;" class="alert alert-danger">
+        <span *ngIf="taxPercent.errors?.required">Ingresa el número de porcentaje</span>
+        <span *ngIf="taxPercent.errors?.min">El número mínimo es 0</span>
+        <span *ngIf="taxPercent.errors?.max">El número máximo es 100</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ion-text-center">
+    <button type="submit" class="button-general" color="secondary" style="text-transform: capitalize;" shape="round">
+      <span style="padding-left: 40px;padding-right: 40px;">Actualizar
+        <ion-icon name="add"></ion-icon>
+      </span>
+
+    </button>
+  </div>
+
+
+</form>

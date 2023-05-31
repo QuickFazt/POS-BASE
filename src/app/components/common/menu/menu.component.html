@@ -1,0 +1,4 @@
+<ion-item (click)="GoTo(p)" *ngFor="let p of pages">
+  <ion-icon slot="start" [name]="p.icon"></ion-icon>
+  <ion-label>{{p.name}}</ion-label>
+</ion-item>
